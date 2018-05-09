@@ -1,0 +1,9 @@
+images {
+  image: "/assets/images/cloud.png"
+}
+images {
+  image: "/assets/images/cloud2.png"
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0

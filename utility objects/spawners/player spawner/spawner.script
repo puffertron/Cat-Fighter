@@ -1,0 +1,9 @@
+function init(self)
+	factory.create("#factory")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("respawn") then
+		factory.create("#factory")
+	end
+end

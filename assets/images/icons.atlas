@@ -1,0 +1,12 @@
+images {
+  image: "/assets/images/money icon.png"
+}
+images {
+  image: "/assets/images/catIcon red.png"
+}
+images {
+  image: "/assets/images/button.png"
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0

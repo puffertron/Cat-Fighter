@@ -1,0 +1,64 @@
+image: "/assets/images/verysmall coin.png"
+tile_width: 8
+tile_height: 8
+tile_margin: 0
+tile_spacing: 0
+collision: "/assets/images/verysmall coin.png"
+material_tag: "tile"
+convex_hulls {
+  index: 0
+  count: 8
+  collision_group: "money"
+}
+convex_hulls {
+  index: 8
+  count: 8
+  collision_group: "money"
+}
+convex_hulls {
+  index: 16
+  count: 8
+  collision_group: "money"
+}
+convex_hulls {
+  index: 24
+  count: 8
+  collision_group: "money"
+}
+convex_hulls {
+  index: 32
+  count: 4
+  collision_group: "money"
+}
+convex_hulls {
+  index: 36
+  count: 4
+  collision_group: "money"
+}
+convex_hulls {
+  index: 40
+  count: 8
+  collision_group: "money"
+}
+convex_hulls {
+  index: 48
+  count: 8
+  collision_group: "money"
+}
+convex_hulls {
+  index: 56
+  count: 8
+  collision_group: "money"
+}
+collision_groups: "money"
+animations {
+  id: "rotate"
+  start_tile: 1
+  end_tile: 9
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+extrude_borders: 0
+inner_padding: 0

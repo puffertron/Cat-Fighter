@@ -1,0 +1,53 @@
+
+
+function init(self)
+	label.set_text("#label", "")
+	self.open = false
+	self.t = 0
+	self.timing = false
+end
+
+local function play_animation(self, anim)
+	-- only play animations which are not already playing
+	if self.anim ~= anim then
+		-- tell the sprite to play the animation
+		msg.post("#popupsprite", "play_animation", {id = anim})
+		-- remember which animation is playing
+		self.anim = anim
+	end
+end
+
+function update(self, dt)
+	if self.timing == true then
+		self.t = self.t + dt
+	end
+	if self.open == true and self.t > 5 then
+		play_animation(self, hash("close"))
+		label.set_text("#label", "")
+		self.timing = false
+		self.t = 0
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("trigger_response") then
+		self.sensor = true
+		play_animation(self, hash("open"))
+	end
+	if message_id == hash("animation_done") and message.id == hash("open") then
+		self.open = true
+		self.timing = true
+		label.set_text("#label", "Use the A and D keys to move.")
+		self.t = 0
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end

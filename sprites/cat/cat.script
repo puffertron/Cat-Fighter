@@ -1,0 +1,170 @@
+local rendercam = require "rendercam.rendercam"
+local move_acceleration = 1200
+local air_acceleration_factor = 0.8
+local max_speed = 300
+local gravity = -900
+local jump_takeoff_speed = 350
+local wall_jump_takeoff_speed = 275
+
+local msg_contact_point_response = hash("contact_point_response")
+local msg_animation_done = hash("animation_done")
+local msg_raycast_miss = hash("ray_cast_missed")
+local msg_raycast_hit = hash("ray_cast_response")
+
+local group_obstacle = hash("default")
+local group_kill = hash("autokill")
+local input_left = hash("left")
+local input_right = hash("right")
+local input_jump = hash("jump")
+local anim_run = hash("walk")
+local anim_idle = hash("idle")
+local anim_jump = hash("jump")
+local anim_fall = hash("fall")
+local anim_spin = hash("spin_fall")
+local anim_punch = hash("punch")
+local anim_wall_turn = hash("wall_turn")
+local anim_wall_slide = hash("wall_slide")
+
+function init(self)
+	self.go_id = go.get_id()
+	local id_table = {id = self.go_id}
+	
+	msg.post(".", "acquire_input_focus")
+	msg.post("/input_handler#input", "cat_id", id_table)
+
+	self.velocity = vmath.vector3(0, 0, 0)
+	self.correction = vmath.vector3()
+	self.ground_contact = false
+	self.move_input = 0
+	self.anim = nil
+	self.dir = 1
+	self.jump = 0
+	self.double_jumping = false
+	self.wall_jumping = false
+	self.wall_contact = false
+	self.wall_near = false
+	self.ground_near = false
+	self.state = nil
+end
+
+local function play_animation(self, anim)
+	-- only play animations which are not already playing
+	if self.anim ~= anim then
+		-- tell the sprite to play the animation
+		msg.post("#cat", "play_animation", {id = anim})
+		-- remember which animation is playing
+		self.anim = anim
+	end
+end
+
+local function update_animations(self)
+	sprite.set_hflip("#cat", self.dir < 0)
+end
+function final(self)
+	msg.post("/player_spawner", "respawn")
+end
+
+function update(self, dt)
+
+	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(0,-70,0)), {hash("default")}, 1)
+	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(10,0,0)), {hash("default")}, 2)
+	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(-10,0,0)), {hash("default")}, 3)
+
+	rendercam.follow(hash(self.go_id))
+	local target_speed = self.move_input * max_speed
+	local speed_diff = target_speed - self.velocity.x
+	local acceleration = vmath.vector3(0, gravity, 0)
+	if speed_diff ~= 0 then
+		if speed_diff < 0 then
+			acceleration.x = -move_acceleration
+		else
+			acceleration.x = move_acceleration
+		end
+		if not self.ground_contact then
+			acceleration.x = air_acceleration_factor * acceleration.x
+		end
+	end
+	local dv = acceleration * dt
+	-- check if dv exceeds the intended speed difference, clamp it in that case
+	if math.abs(dv.x) > math.abs(speed_diff) then
+		dv.x = speed_diff
+	end
+	-- save the current velocity for later use
+	-- (self.velocity, which right now is the velocity used the previous frame)
+	local v0 = self.velocity
+	-- calculate the new velocity by adding the velocity change
+	self.velocity = self.velocity + dv
+	-- calculate the translation this frame by integrating the velocity
+	local dp = (v0 + self.velocity) * dt * 0.5
+	-- apply it to the player character
+	go.set_position(go.get_position() + dp)
+
+	-- update the jump timer
+	if self.touch_jump_timer > 0 then
+		self.touch_jump_timer = self.touch_jump_timer - dt
+	end
+
+	update_animations(self)
+
+	-- reset volatile state
+	self.correction = vmath.vector3()
+	self.move_input = 0
+	self.ground_contact = false
+	self.wall_contact = false
+	self.wall_near = false
+	self.ground_near = false
+	
+end
+
+local function handle_obstacle_contact(self, normal, distance)
+	local proj = vmath.dot(self.correction, normal)
+	local comp = (distance - proj) * normal
+	self.correction = self.correction + comp
+	go.set_position(go.get_position() + comp)
+
+	if normal.y > 0.1 then
+		self.ground_contact = true
+		self.doublejumping = false
+		self.jump = 0
+	end
+	
+	if normal.x > 0.1 or normal.x < -0.1 then
+		self.wallcontact = true
+	end
+
+	proj = vmath.dot(self.velocity, normal)
+	if proj < 0 then
+		self.velocity = self.velocity - proj * normal
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == msg_contact_point_response then
+		if message.group == group_obstacle then
+			handle_obstacle_contact(self, message.normal, message.distance)
+		elseif message.group == group_kill then
+			go.delete()
+		end
+	end
+
+	if message_id == msg_raycast_hit then
+		if message.request_id == 1 then
+			if self.ground_contact == false and self.velocity.y < 0 then
+				self.ground_near = true
+			end
+		end
+		if message.request_id == 2 or message.request_id == 3 then
+			if self.ground_contact == false then
+				self.wall_near = true
+			end
+		end
+	end
+end
+
+local function jump(self)
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end

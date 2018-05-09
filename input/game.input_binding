@@ -1,0 +1,20 @@
+key_trigger {
+  input: KEY_W
+  action: "jump"
+}
+key_trigger {
+  input: KEY_D
+  action: "right"
+}
+key_trigger {
+  input: KEY_A
+  action: "left"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_LEFT
+  action: "click"
+}
+gamepad_trigger {
+  input: GAMEPAD_RPAD_DOWN
+  action: "a"
+}

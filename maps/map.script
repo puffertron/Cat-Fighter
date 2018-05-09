@@ -1,0 +1,51 @@
+local small_coin = 244
+local coin = 245
+local leaf_generator = 243
+
+function init(self)
+	x,y,w,h = tilemap.get_bounds("#level")
+	msg.post("/testlevel1/entity_spawner", "tilemapBounds", {x , y, w, h})
+	for xi = x, x + w - 1 do
+		for yi = y, y + h - 1 do
+			local tile = tilemap.get_tile("#level", "objects", xi, yi)
+			print(tile)
+			if tile == small_coin then
+				tilemap.set_tile("#level", "objects", xi, yi, 256)
+				factory.create("/testlevel1/entity_spawner#smallcoinfactory", vmath.vector3((xi-0.5)*16,(yi)*16, 0))
+			end
+			if tile == coin then
+				tilemap.set_tile("#level", "objects", xi, yi, 256)
+				factory.create("/testlevel1/entity_spawner#coinfactory", vmath.vector3((xi-0.5)*16,(yi)*16, 0))
+			end
+			if tile == leaf_generator then
+				tilemap.set_tile("#level", "objects", xi, yi, 256)
+				factory.create("/testlevel1/entity_spawner#leafparticlefactory", vmath.vector3((xi-0.5)*16,(yi-0.5)*16, 0))
+			end
+		end
+	end
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end

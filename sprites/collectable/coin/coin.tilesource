@@ -1,0 +1,79 @@
+image: "/assets/images/coinSmall.png"
+tile_width: 16
+tile_height: 16
+tile_margin: 0
+tile_spacing: 0
+collision: "/assets/images/coinSmall.png"
+material_tag: "tile"
+convex_hulls {
+  index: 0
+  count: 16
+  collision_group: "money"
+}
+convex_hulls {
+  index: 16
+  count: 16
+  collision_group: "money"
+}
+convex_hulls {
+  index: 32
+  count: 12
+  collision_group: "money"
+}
+convex_hulls {
+  index: 44
+  count: 12
+  collision_group: "money"
+}
+convex_hulls {
+  index: 56
+  count: 8
+  collision_group: "money"
+}
+convex_hulls {
+  index: 64
+  count: 4
+  collision_group: "money"
+}
+convex_hulls {
+  index: 68
+  count: 8
+  collision_group: "money"
+}
+convex_hulls {
+  index: 76
+  count: 12
+  collision_group: "money"
+}
+convex_hulls {
+  index: 88
+  count: 12
+  collision_group: "money"
+}
+convex_hulls {
+  index: 100
+  count: 12
+  collision_group: "money"
+}
+convex_hulls {
+  index: 112
+  count: 0
+  collision_group: ""
+}
+convex_hulls {
+  index: 112
+  count: 0
+  collision_group: ""
+}
+collision_groups: "money"
+animations {
+  id: "rotate"
+  start_tile: 1
+  end_tile: 10
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+extrude_borders: 0
+inner_padding: 0

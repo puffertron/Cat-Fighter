@@ -1,0 +1,4 @@
+tile_set: "/sprites/collectable/SpecialCoin/coin.tilesource"
+default_animation: "rotate"
+material: "/builtins/materials/sprite.material"
+blend_mode: BLEND_MODE_ALPHA

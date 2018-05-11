@@ -1,6 +1,6 @@
 [project]
 title = Cat Fighter
-dependencies = https://github.com/rgrams/rendercam/archive/v1.0.zip,https://github.com/britzl/Platypus/archive/master.zip
+dependencies = https://github.com/rgrams/rendercam/archive/v1.0.zip
 version = 0.01
 
 [bootstrap]
@@ -36,5 +36,8 @@ gravity_y = -50.0
 app_id = 39F80B106D07483C
 
 [sprite]
+subpixels = 0
+
+[label]
 subpixels = 0
 

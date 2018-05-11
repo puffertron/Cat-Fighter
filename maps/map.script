@@ -11,15 +11,15 @@ function init(self)
 			print(tile)
 			if tile == small_coin then
 				tilemap.set_tile("#level", "objects", xi, yi, 256)
-				factory.create("/testlevel1/entity_spawner#smallcoinfactory", vmath.vector3((xi-0.5)*16,(yi)*16, 0))
+				factory.create("/testlevel1/entity_spawner#smallcoinfactory", vmath.vector3((xi-0.5)*16,(yi)*16, 0), nil, {type = 1})
 			end
 			if tile == coin then
 				tilemap.set_tile("#level", "objects", xi, yi, 256)
-				factory.create("/testlevel1/entity_spawner#coinfactory", vmath.vector3((xi-0.5)*16,(yi)*16, 0))
+				factory.create("/testlevel1/entity_spawner#coinfactory", vmath.vector3((xi-0.5)*16,(yi)*16, 0), nil, {type = 2})
 			end
 			if tile == leaf_generator then
 				tilemap.set_tile("#level", "objects", xi, yi, 256)
-				factory.create("/testlevel1/entity_spawner#leafparticlefactory", vmath.vector3((xi-0.5)*16,(yi-0.5)*16, 0))
+				factory.create("/testlevel1/entity_spawner#leafparticlefactory", vmath.vector3((xi-0.5)*16,(yi-0.5)*16, 0), nil, {type = 3})
 			end
 		end
 	end

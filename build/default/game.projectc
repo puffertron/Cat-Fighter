@@ -37,3 +37,6 @@ app_id = 39F80B106D07483C
 [sprite]
 subpixels = 0
 
+[label]
+subpixels = 0
+

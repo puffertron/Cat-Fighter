@@ -1,6 +1,6 @@
 
-šq
-ÌC-- player.script
+Žv
+ŽF-- player.script
 local rendercam = require "rendercam.rendercam"
 -- these are the tweaks for the mechanics, feel free to change them for a different feeling
 -- the acceleration to move right/left
@@ -15,7 +15,8 @@ local wall_slide_speed = -500
 -- take-off speed when jumping in pixel units
 local jump_takeoff_speed = 350
 local wall_jump_takeoff_speed = 325
-local wall_cooldown
+local wall_cooldown = 0
+local coin_amount = 0
 
 
 -- pre-hashing ids improves performance
@@ -26,6 +27,8 @@ local msg_raycast_hit = hash("ray_cast_response")
 
 local group_obstacle = hash("default")
 local group_kill = hash("autokill")
+local group_money = hash("money")
+
 local input_left = hash("left")
 local input_right = hash("right")
 local input_jump = hash("jump")
@@ -115,7 +118,6 @@ local function attack(self, type)
 end
 
 function update(self, dt)
-
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(0,-70,0)), {hash("default")}, 1)
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(50,0,0)), {hash("default")}, 2)
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(-50,0,0)), {hash("default")}, 3)
@@ -208,11 +210,21 @@ function on_message(self, message_id, message, sender)
 		-- check that the object is something we consider an obstacle
 		if message.group == group_obstacle then
 			handle_obstacle_contact(self, message.normal, message.distance)
-		elseif message.group == group_kill then
+		end
+		if message.group == group_kill then
 			go.delete()
+		end
+		if message.group == group_money then
+			msg.post(message.other_id, "check_type")
+			msg.post(message.other_id, "end_object")
 		end
 	end
 
+	if message_id == hash("coin_type") then
+		msg.post("/gui#ingame", "coins_collected", {message[1]})
+		print(message[1])
+	end
+	
 	if message_id == msg_raycast_hit then
 		if message.request_id == 1 then
 			self.ground_near = true
@@ -286,41 +298,48 @@ end
 function final(self)
 	msg.post("/player_spawner", "respawn")
 end
-/sprites/cat/player.script¬-LJ =/sprites/cat/player.scriptŒ   4G'4 7>:  3 7  :4 7% % >4 7%	 %
+/sprites/cat/player.scriptÞ/LJ =/sprites/cat/player.scriptŒ   4G*4 7>:  3 7  :4 7% % >4 7%	 %
   >4 7'  '  '  >: 4 7>: ) : '  : )  : '  : ' : '  : ) : ) : ) : ) : ) : G  ground_nearwall_nearwall_contactwall_jumpingdouble_jumping	jumpdirtouch_jump_timer	animmove_inputground_contactcorrectionvector3
 vmathvelocitycat_id/input_handler#inputacquire_input_focus.	postmsgid  get_idgo
 go_id
 
 
 
-self  5id_table - }   C7   T€4 7% % 3 :>:  G  id  play_animation	#cat	postmsg	animself  anim   ½ I¡M4  7% 7 '    T€) T€) >7   T€7 7	  T€+    + >T1€+    + >T,€7 7'   T€7  T€+    + >T€+    + >T€7  T€+    + >T€+    + >7	  T€+    + >7
-  T€+    + >G  ÀÀÀÀÀÀÀwall_contactground_neardouble_jumpingyxvelocityground_contactdir	#catset_hflipsprite 	play_animation anim_idle anim_run anim_jump anim_spin anim_fall anim_wall_slide self  J T  $n5  +    4  >G  Àattack_typeplay_animation self  type   ê 
-“´s44  74 7>4 7>4 7'  'ºÿ'  >2 4 % > <  ' >4  74 7>4 7>4 7'2 '  '  >2 4 % > <  ' >4  74 7>4 7>4 7'Îÿ'  '  >2 4 % > <  ' >+  74 7	 > = 7
+self  5id_table - }   F7   T€4 7% % 3 :>:  G  id  play_animation	#cat	postmsg	animself  anim   ½ I¡P4  7% 7 '    T€) T€) >7   T€7 7	  T€+    + >T1€+    + >T,€7 7'   T€7  T€+    + >T€+    + >T€7  T€+    + >T€+    + >7	  T€+    + >7
+  T€+    + >G  ÀÀÀÀÀÀÀwall_contactground_neardouble_jumpingyxvelocityground_contactdir	#catset_hflipsprite 	play_animation anim_idle anim_run anim_jump anim_spin anim_fall anim_wall_slide self  J T  $q5  +    4  >G  Àattack_typeplay_animation self  type   ê 
+“´v34  74 7>4 7>4 7'  'ºÿ'  >2 4 % > <  ' >4  74 7>4 7>4 7'2 '  '  >2 4 % > <  ' >4  74 7>4 7>4 7'Îÿ'  '  >2 4 % > <  ' >+  74 7	 > = 7
  +  7 74 7'  + '  > T€'   T€+  :T€+ :7   T€+ 7 : 4 77>4 7 > T€:7 7 : 7  4 74	 7		>			>+ 	  >4 7>: '  :
- ) : ) : ) : ) : G   ÀÀÀÀÀÀground_nearwall_nearwall_contactcorrectionget_positionset_positionabs	mathground_contactxvelocitymove_input
+ ) : ) : ) : ) : G   ÀÀÀÀÀÀground_nearwall_nearwall_contactcorrectionget_positionset_positionabs	mathground_contactxvelocitymove_input
 go_idfollowdefault	hashvector3
-vmathget_world_positiongoray_castphysics€€À™ €€€ÿ
-
-
-"$$$&&&&(((((((***----..//0011224rendercam max_speed gravity move_acceleration air_acceleration_factor update_animations self  ”dt  ”target_speed LHspeed_diff Eacceleration ?dv ,v0  dp  —  Hr© 4  77  > 7 : 4 74 7>>4  7 4  7' '	  '
+vmathget_world_positiongoray_castphysics€€À™ €€€ÿ			!###%%%%'''''''))),,,,--..//00113rendercam max_speed gravity move_acceleration air_acceleration_factor update_animations self  ”dt  ”target_speed LHspeed_diff Eacceleration ?dv ,v0  dp  —  Hr« 4  77  > 7 : 4 74 7>>4  7 4  7' '	  '
   > =	  T€) : ) : '  :	 4  7 4  7'  '	 '
   > =	  T€) :
  7'   T€'ÿÿ: T€' : 4  77  > '   T€7  : G  velocitydirxwall_contact	jumpdouble_jumpingground_contactvector3get_positionset_positiongocorrectiondot
-vmath 							 self  Inormal  Idistance  Iproj Ccomp A Ï 	-²Ë+   T€7 +  T€+   77>T€7 +  T€4 7>+  T€7	  T€) : 7	 T€7  T€) : 7	 T€7  T€) : G  	ÀÀÀÀÀwall_nearground_contactground_nearrequest_iddeletegodistancenormal
-groupmsg_contact_point_response group_obstacle handle_obstacle_contact group_kill msg_raycast_hit self  .message_id  .message  .sender  . ” Ré7    T€7 	  T€7 	  T€) : 7  T€7 +  :T€7 +  :7  : +   + >G  ÀÀÀyvelocitydouble_jumping	jumpground_contactÍ™³ææÌ™ÿ
+vmath 							 self  Inormal  Idistance  Iproj Ccomp A Ç 	JÛÍ&+   T€7 +  T€+   77>7 +  T€4 7>7 +  T
+€4 77% >4 77%	 >4
+ % > T€4 7% % 2 8;>4 8>+  T€7	  T€) : 7	 T€7  T€) : 7	 T€7  T€) : G  
+ÀÀÀÀÀÀwall_nearground_contactground_nearrequest_id
+printcoins_collected/gui#ingamecoin_type	hashend_objectcheck_typeother_id	postmsgdeletegodistancenormal
+group
 
 
-jump_takeoff_speed play_animation anim_jump self   ¶ 1ø7  +  :7  +  7   :) : ' : 7 : G  À	jumpdouble_jumpingdirxyvelocityçÌ™³³æÌÿþÿÿÿwall_jump_takeoff_speed self   [  €7  7'   T€7  7  7 :G  yvelocity€€€ÿself   ”  ,Šˆ+   T€7 :  'ÿÿ: T"€+  T€7:  ' : T€+  T€7  T€7  T€7  T€+   >T
-€+   >T€7  T€+   >G  ÀÀÀÀÀ Àreleasedground_contactwall_contactpresseddir
+
+   !!!""&msg_contact_point_response group_obstacle handle_obstacle_contact group_kill group_money msg_raycast_hit self  Kmessage_id  Kmessage  Ksender  K ” Rõ7    T€7 	  T€7 	  T€) : 7  T€7 +  :T€7 +  :7  : +   + >G  ÀÀÀyvelocitydouble_jumping	jumpground_contactÍ™³ææÌ™ÿ
+
+
+jump_takeoff_speed play_animation anim_jump self   ¶ 1„7  +  :7  +  7   :) : ' : 7 : G  À	jumpdouble_jumpingdirxyvelocityçÌ™³³æÌÿþÿÿÿwall_jump_takeoff_speed self   [  Œ7  7'   T€7  7  7 :G  yvelocity€€€ÿself   ”  ,Š”+   T€7 :  'ÿÿ: T"€+  T€7:  ' : T€+  T€7  T€7  T€7  T€+   >T
+€+   >T€7  T€+   >G  ÀÀÀ!À À"Àreleasedground_contactwall_contactpresseddir
 valuemove_input						
 
 
 
-input_left input_right input_jump wall_jump jump abort_jump self  -action_id  -action  -dt  - R   œ4  7% % >G  respawn/player_spawner	postmsgself   ÿ	 " $Qµ Ÿ4   % > '°(  ','|ü'þ'^'E)  4	 %
- >	4
- % >
-4 % >4 % >4 % >4 % >4 %	 >4 %
- >4 % >4 % >4 % >4 % >4 % >4 % >4 % >4 % >4 % >1 5 1 1 1 1 5 1 1 5 1 1 1  1!  5!! 1!" 5!# 0  €G  
+input_left input_right input_jump wall_jump jump abort_jump self  -action_id  -action  -dt  - R   ¨4  7% % >G  respawn/player_spawner	postmsgself   ¹
+ $ %UÙ «4   % > '°(  ','|ü'þ'^'E'  '	  4
+ % >
+4 % >4 % >4 % >4 % >4 % >4 %	 >4 %
+ >4 % >4 % >4 % >4 % >4 % >4 % >4 % >4 % >4 % >4 % >1 5 1 1 1 1 5 1 1  5  1  1! 1"  1#! 5#" 1## 5#$ 0  €G  
 final on_input    on_message  update    	init wall_slidewall_turn
 punchspin_fall	fall	idle	walk	jump
-right	leftautokilldefaultray_cast_responseray_cast_missedanimation_donecontact_point_response	hashrendercam.rendercamrequireµæÌ™™³¦ÿ     	                                             ! ! ! " " " # # # $ $ $ % % % A ' K l q § s É ç Ë ö þ rendercam Nmove_acceleration Mair_acceleration_factor Lmax_speed Kgravity Jwall_slide_speed Ijump_takeoff_speed Hwall_jump_takeoff_speed Gwall_cooldown Fmsg_contact_point_response Cmsg_animation_done @msg_raycast_miss =msg_raycast_hit :group_obstacle 7group_kill 4input_left 1input_right .input_jump +anim_run (anim_idle %anim_jump "anim_fall anim_spin anim_punch anim_wall_turn anim_wall_slide play_animation update_animations attack handle_obstacle_contact jump wall_jump abort_jump   rendercam.rendercam/rendercam/rendercam.luac" 
+right	left
+moneyautokilldefaultray_cast_responseray_cast_missedanimation_donecontact_point_response	hashrendercam.rendercamrequireµæÌ™™³¦ÿ     	                                        ! ! ! " " " # # # $ $ $ % % % & & & ' ' ' ( ( ( D * N o t © v Ë ó Í 
+&*(**rendercam Rmove_acceleration Qair_acceleration_factor Pmax_speed Ogravity Nwall_slide_speed Mjump_takeoff_speed Lwall_jump_takeoff_speed Kwall_cooldown Jcoin_amount Imsg_contact_point_response Fmsg_animation_done Cmsg_raycast_miss @msg_raycast_hit =group_obstacle :group_kill 7group_money 4input_left 1input_right .input_jump +anim_run (anim_idle %anim_jump "anim_fall anim_spin anim_punch anim_wall_turn anim_wall_slide play_animation update_animations attack handle_obstacle_contact jump wall_jump abort_jump   rendercam.rendercam/rendercam/rendercam.luac" 

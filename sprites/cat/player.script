@@ -13,7 +13,8 @@ local wall_slide_speed = -500
 -- take-off speed when jumping in pixel units
 local jump_takeoff_speed = 350
 local wall_jump_takeoff_speed = 325
-local wall_cooldown
+local wall_cooldown = 0
+local coin_amount = 0
 
 
 -- pre-hashing ids improves performance
@@ -24,6 +25,8 @@ local msg_raycast_hit = hash("ray_cast_response")
 
 local group_obstacle = hash("default")
 local group_kill = hash("autokill")
+local group_money = hash("money")
+
 local input_left = hash("left")
 local input_right = hash("right")
 local input_jump = hash("jump")
@@ -113,7 +116,6 @@ local function attack(self, type)
 end
 
 function update(self, dt)
-
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(0,-70,0)), {hash("default")}, 1)
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(50,0,0)), {hash("default")}, 2)
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(-50,0,0)), {hash("default")}, 3)
@@ -206,11 +208,21 @@ function on_message(self, message_id, message, sender)
 		-- check that the object is something we consider an obstacle
 		if message.group == group_obstacle then
 			handle_obstacle_contact(self, message.normal, message.distance)
-		elseif message.group == group_kill then
+		end
+		if message.group == group_kill then
 			go.delete()
+		end
+		if message.group == group_money then
+			msg.post(message.other_id, "check_type")
+			msg.post(message.other_id, "end_object")
 		end
 	end
 
+	if message_id == hash("coin_type") then
+		msg.post("/gui#ingame", "coins_collected", {message[1]})
+		print(message[1])
+	end
+	
 	if message_id == msg_raycast_hit then
 		if message.request_id == 1 then
 			self.ground_near = true

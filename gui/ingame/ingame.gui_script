@@ -1,6 +1,6 @@
 function init(self)
-	-- Add initialization code here
-	-- Remove this function if not needed
+	self.coins_text = gui.get_node("coins_text")
+	self.coins = 0
 end
 
 function final(self)
@@ -9,11 +9,15 @@ function final(self)
 end
 
 function update(self, dt)
+	gui.set_text(self.coins_text, self.coins)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Remove this function if not needed
+	if message_id == hash("coins_collected") then
+		coin_type = message[1]
+		print(coin_type)
+		self.coins = self.coins+ coin_type
+	end
 end
 
 function on_input(self, action_id, action)
@@ -22,6 +26,6 @@ function on_input(self, action_id, action)
 end
 
 function on_reload(self)
-	-- Add reload-handling code here
+	-- Add input-handling code here
 	-- Remove this function if not needed
 end

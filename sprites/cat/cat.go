@@ -57,6 +57,7 @@ embedded_components {
   "mask: \"render\"\n"
   "mask: \"damage\"\n"
   "mask: \"info\"\n"
+  "mask: \"money\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"

@@ -1,6 +1,4 @@
 function init(self)
-	local level = nil
-	local map_bounds = nil
 end
 
 function final(self)
@@ -16,6 +14,9 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("tilemapBounds") then
 		map_bounds = message
+	end
+	if message_id == hash("coin_explosion") then
+		factory.create("#coineffectfactory", message[1])
 	end
 end
 

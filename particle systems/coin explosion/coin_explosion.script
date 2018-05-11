@@ -1,7 +1,6 @@
-go.property("type", 0)
-
 function init(self)
-	
+	msg.post("#sprite", "play_animation", {id = hash("anim")})
+	print("hi")
 end
 
 function final(self)
@@ -15,12 +14,8 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("end_object") then
-		msg.post("/testlevel1/entity_spawner","coin_explosion", {go.get_position()})
+	if message_id == hash("animation_done") then
 		go.delete()
-	end
-	if message_id == hash("check_type") then
-		msg.post(sender, "coin_type", {self.type})
 	end
 end
 

@@ -1,6 +1,7 @@
 function init(self)
 	self.coins_text = gui.get_node("coins_text")
 	self.coins = 0
+	self.default_pos = gui.get_position(self.coins_text)
 end
 
 function final(self)
@@ -17,6 +18,9 @@ function on_message(self, message_id, message, sender)
 		coin_type = message[1]
 		print(coin_type)
 		self.coins = self.coins+ coin_type
+		target_pos = gui.get_position(self.coins_text) + vmath.vector3(0,3,0)
+		gui.animate(self.coins_text, "position", target_pos, gui.EASING_OUTINBOUNCE, 0.2, 0, nil, gui.PLAYBACK_ONCE_PINGPONG)
+		gui.set_position(self.coins_text, self.default_pos)
 	end
 end
 

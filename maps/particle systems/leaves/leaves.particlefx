@@ -14,7 +14,7 @@ emitters {
     z: 0.8729267
     w: -0.48785132
   }
-  tile_source: "/particle systems/leaf.tilesource"
+  tile_source: "/maps/particle systems/leaf.tilesource"
   animation: "anim"
   material: "/builtins/materials/particlefx.material"
   blend_mode: BLEND_MODE_ALPHA

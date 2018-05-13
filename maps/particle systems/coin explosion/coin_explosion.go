@@ -1,6 +1,6 @@
 components {
   id: "coin_explosion"
-  component: "/particle systems/coin explosion/coin_explosion.script"
+  component: "/maps/particle systems/coin explosion/coin_explosion.script"
   position {
     x: 0.0
     y: 0.0
@@ -16,7 +16,7 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/particle systems/coin explosion/coin_explosion.tilesource\"\n"
+  data: "tile_set: \"/maps/particle systems/coin explosion/coin_explosion.tilesource\"\n"
   "default_animation: \"anim\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"

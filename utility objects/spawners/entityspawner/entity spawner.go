@@ -70,7 +70,7 @@ embedded_components {
 embedded_components {
   id: "leafparticlefactory"
   type: "factory"
-  data: "prototype: \"/particle systems/leaves/leafparticles.go\"\n"
+  data: "prototype: \"/maps/particle systems/leaves/leafparticles.go\"\n"
   "load_dynamically: false\n"
   ""
   position {
@@ -88,7 +88,7 @@ embedded_components {
 embedded_components {
   id: "coineffectfactory"
   type: "factory"
-  data: "prototype: \"/particle systems/coin explosion/coin_explosion.go\"\n"
+  data: "prototype: \"/maps/particle systems/coin explosion/coin_explosion.go\"\n"
   "load_dynamically: false\n"
   ""
   position {

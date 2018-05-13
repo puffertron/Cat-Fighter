@@ -1,6 +1,6 @@
 components {
   id: "leaves"
-  component: "/particle systems/leaves/leaves.particlefx"
+  component: "/maps/particle systems/leaves/leaves.particlefx"
   position {
     x: 0.0
     y: 0.0
@@ -15,7 +15,7 @@ components {
 }
 components {
   id: "particle"
-  component: "/particle systems/leaves/particle.script"
+  component: "/maps/particle systems/leaves/particle.script"
   position {
     x: 0.0
     y: 0.0

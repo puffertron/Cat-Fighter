@@ -1,4 +1,10 @@
+local oyster = require "oyster.oyster"
+local gamestate = require "oyster.gamestate"
+local playerdata = require "oyster.playerdata"
+local stopwatch = require "oyster.stopwatch"
+
 local rendercam = require "rendercam.rendercam"
+
 local move_acceleration = 1200
 local air_acceleration_factor = 0.8
 local max_speed = 300
@@ -26,6 +32,7 @@ local anim_wall_turn = hash("wall_turn")
 local anim_wall_slide = hash("wall_slide")
 
 function init(self)
+	playerdata.add(1, {["NAME"] = "CatRed", ["POS"] = go.get_position(), ["HP"] = 100, ["MONEY"] = 0})
 	self.go_id = go.get_id()
 	local id_table = {id = self.go_id}
 	
@@ -45,6 +52,7 @@ function init(self)
 	self.wall_near = false
 	self.ground_near = false
 	self.state = nil
+	self.hp = 100
 end
 
 local function play_animation(self, anim)
@@ -65,7 +73,9 @@ function final(self)
 end
 
 function update(self, dt)
-
+	playerdata.set(1, "POS", go.get_position())
+	playerdata.set(1, "HP", self.hp)
+	
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(0,-70,0)), {hash("default")}, 1)
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(10,0,0)), {hash("default")}, 2)
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(-10,0,0)), {hash("default")}, 3)

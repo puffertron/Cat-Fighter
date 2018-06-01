@@ -1,0 +1,18 @@
+local monarch = require "monarch.monarch"
+
+local oyster = require "oyster.oyster"
+local gamestate = require "oyster.gamestate"
+local playerdata = require "oyster.playerdata"
+local stopwatch = require "oyster.stopwatch"
+
+local rendercam = require "rendercam.rendercam"
+
+function init(self)
+	local states = {"MAIN_MENU", "PAUSE", "LOADING", "MAP", "IN_GAME"}
+	gamestate.init(states)
+	msg.post("#", "first screen")
+end
+function on_message(self)
+	print("showing menu")
+	monarch.show(hash("title"))
+end

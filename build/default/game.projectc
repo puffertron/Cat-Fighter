@@ -3,7 +3,7 @@ title = Cat Fighter
 version = 0.01
 
 [bootstrap]
-main_collection = /main/main.collectionc
+main_collection = /main/init.collectionc
 render = /rendercam/rendercam.renderc
 
 [input]

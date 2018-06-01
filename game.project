@@ -1,10 +1,10 @@
 [project]
 title = Cat Fighter
-dependencies = https://github.com/rgrams/rendercam/archive/v1.0.zip
+dependencies = https://github.com/rgrams/rendercam/archive/v1.0.zip,https://github.com/lukas-kasticky/oyster/archive/1.2.zip,https://github.com/britzl/monarch/archive/master.zip
 version = 0.01
 
 [bootstrap]
-main_collection = /main/main.collectionc
+main_collection = /main/init.collectionc
 render = /rendercam/rendercam.renderc
 
 [input]

@@ -1,4 +1,4 @@
-name: "default"
+name: "ingame"
 instances {
   id: "input_handler"
   prototype: "/input/input_handler.go"
@@ -57,7 +57,7 @@ instances {
     }
     properties {
       id: "viewArea"
-      value: "768.0, 768.0, 0.0"
+      value: "512.0, 512.0, 0.0"
       type: PROPERTY_TYPE_VECTOR3
     }
   }

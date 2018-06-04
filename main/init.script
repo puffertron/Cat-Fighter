@@ -8,11 +8,12 @@ local stopwatch = require "oyster.stopwatch"
 local rendercam = require "rendercam.rendercam"
 
 function init(self)
-	local states = {"MAIN_MENU", "PAUSE", "LOADING", "MAP", "IN_GAME"}
+	local states = {"TITLE","MAIN_MENU", "PAUSE", "LOADING", "MAP", "IN_GAME"}
 	gamestate.init(states)
+	gamestate.set("TITLE")
 	msg.post("#", "first screen")
 end
 function on_message(self)
-	print("showing menu")
+	print("showing title")
 	monarch.show(hash("title"))
 end

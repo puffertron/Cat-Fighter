@@ -3,7 +3,7 @@ title = Cat Fighter
 version = 0.01
 
 [bootstrap]
-main_collection = /main/init.collectionc
+main_collection = /main/main.collectionc
 render = /rendercam/rendercam.renderc
 
 [input]
@@ -12,8 +12,9 @@ use_accelerometer = 0
 
 [display]
 high_dpi = 0
-width = 1080
-height = 720
+width = 768
+height = 512
+update_frequency = 30
 
 [script]
 shared_state = 1

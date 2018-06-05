@@ -11,9 +11,4 @@ function init(self)
 	local states = {"TITLE","MAIN_MENU", "PAUSE", "LOADING", "MAP", "IN_GAME"}
 	gamestate.init(states)
 	gamestate.set("TITLE")
-	msg.post("#", "first screen")
-end
-function on_message(self)
-	print("showing title")
-	monarch.show(hash("title"))
 end

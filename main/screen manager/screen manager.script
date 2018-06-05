@@ -1,0 +1,40 @@
+local monarch = require "monarch.monarch"
+local gamestate = require "oyster.gamestate"
+local stateNow = nil
+local stateThen = nil
+function init(self)
+	-- Add initialization code here
+	-- Remove this function if not needed
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	stateNow = gamestate.get()
+	if stateThen ~= stateNow then
+		if hash(string.lower(gamestate.get())) ~= monarch.top() then
+			print("switching screen to :")
+			print(gamestate.get())
+			monarch.show(string.lower(gamestate.get()))
+		end
+	end
+	stateThen = stateNow
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end

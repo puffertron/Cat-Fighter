@@ -81,6 +81,7 @@ function update(self, dt)
 	physics.ray_cast(go.get_world_position(), (go.get_world_position() + vmath.vector3(-10,0,0)), {hash("default")}, 3)
 
 	rendercam.follow(hash(self.go_id))
+	
 	local target_speed = self.move_input * max_speed
 	local speed_diff = target_speed - self.velocity.x
 	local acceleration = vmath.vector3(0, gravity, 0)

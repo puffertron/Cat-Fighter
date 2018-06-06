@@ -16,6 +16,7 @@ high_dpi = 0
 width = 768
 height = 512
 update_frequency = 30
+variable_dt = 0
 
 [script]
 shared_state = 1

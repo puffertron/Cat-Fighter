@@ -1,11 +1,11 @@
+local space_key = hash("space")
+local w_key = hash("jump")
+local s_key = hash("nil")
+local a_key = hash("left")
+local d_key = hash("right")
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	--inputs
-	local space_key = hash("space")
-	local w_key = hash("jump")
-	local s_key = hash("nil")
-	local a_key = hash("left")
-	local d_key = hash("right")
 end
 
 function final(self)
@@ -14,8 +14,7 @@ function final(self)
 end 
 
 function update(self, dt)
-	-- Add update code here
-	-- Remove this function if not needed
+	
 end
 
 function on_message(self, message_id, message, sender)
@@ -31,6 +30,7 @@ function on_input(self, action_id, action)
 			msg.post(cat_id, "a_released")
 		end
 	end
+	
 end
 
 function on_reload(self)

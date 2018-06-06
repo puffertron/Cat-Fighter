@@ -1,4 +1,24 @@
 name: "game"
+instances {
+  id: "input_handler"
+  prototype: "/input/input_handler.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "main_menu"
@@ -20,6 +40,11 @@ embedded_instances {
   "    id: \"screen_id\"\n"
   "    value: \"main_menu\"\n"
   "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"transition_url\"\n"
+  "    value: \"\"\n"
+  "    type: PROPERTY_TYPE_URL\n"
   "  }\n"
   "}\n"
   "embedded_components {\n"

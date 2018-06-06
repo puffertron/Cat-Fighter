@@ -1,13 +1,28 @@
 local monarch = require "monarch.monarch"
 local gamestate = require "oyster.gamestate"
 
+local function tablelength(T)
+	local count = 0
+	for _ in pairs(T) do count = count + 1 end
+	return count
+end
+
+local function move_buttons(buttons, min_duration, max_duration, easing, add_pos)
+	for n in pairs(buttons) do
+		duration = (min_duration + ((max_duration - min_duration) / tablelength(buttons)) * n)
+		gui.animate(buttons[n], "position", (gui.get_position(buttons[n])+add_pos), easing, duration)
+	end
+end
+
 function init(self)
+	local cat = gui.get_node("cat Picture")
+	local start_prompt = gui.get_node("press start")
+	move_buttons({cat}, 0.5, 0.5, gui.EASING_OUTCUBIC, vmath.vector3(0,465,0))
 	msg.post(".", "acquire_input_focus")
 end
 
 function final(self)
-	-- Add finalization code here
-	-- Remove this function if not needed
+	msg.post(".", "release_input_focus")
 end
 
 function update(self, dt)

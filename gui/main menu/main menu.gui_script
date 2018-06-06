@@ -1,3 +1,6 @@
+local monarch = require "monarch.monarch"
+local gamestate = require "oyster.gamestate"
+
 local clicking = false
 local buttons = {}
 

@@ -7,6 +7,10 @@ textures {
   name: "icons"
   texture: "/assets/images/icons.atlas"
 }
+textures {
+  name: "gui"
+  texture: "/assets/gui/gui.atlas"
+}
 background_color {
   x: 0.0
   y: 0.0
@@ -33,8 +37,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 60.0
+    x: 192.0
+    y: 64.0
     z: 0.0
     w: 1.0
   }
@@ -46,7 +50,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "icons/button"
+  texture: "gui/wood button"
   id: "play_btn"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -55,10 +59,10 @@ nodes {
   layer: ""
   inherit_alpha: true
   slice9 {
-    x: 4.0
-    y: 4.0
-    z: 4.0
-    w: 4.0
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -93,9 +97,9 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.6
-    y: 0.0
-    z: 0.0
+    x: 0.34836066
+    y: 0.16275866
+    z: 0.06995767
     w: 1.0
   }
   type: TYPE_TEXT
@@ -150,8 +154,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 60.0
+    x: 192.0
+    y: 64.0
     z: 0.0
     w: 1.0
   }
@@ -163,7 +167,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "icons/button"
+  texture: "gui/wood button"
   id: "settings_btn"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -172,10 +176,10 @@ nodes {
   layer: ""
   inherit_alpha: true
   slice9 {
-    x: 4.0
-    y: 4.0
-    z: 4.0
-    w: 4.0
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true
@@ -210,9 +214,9 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.6
-    y: 0.0
-    z: 0.0
+    x: 0.34901962
+    y: 0.16470589
+    z: 0.07058824
     w: 1.0
   }
   type: TYPE_TEXT
@@ -267,8 +271,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 60.0
+    x: 192.0
+    y: 64.0
     z: 0.0
     w: 1.0
   }
@@ -280,7 +284,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "icons/button"
+  texture: "gui/wood button"
   id: "quit_btn"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -289,10 +293,10 @@ nodes {
   layer: ""
   inherit_alpha: true
   slice9 {
-    x: 4.0
-    y: 4.0
-    z: 4.0
-    w: 4.0
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
   }
   clipping_mode: CLIPPING_MODE_NONE
   clipping_visible: true

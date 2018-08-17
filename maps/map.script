@@ -8,7 +8,6 @@ function init(self)
 	for xi = x, x + w - 1 do
 		for yi = y, y + h - 1 do
 			local tile = tilemap.get_tile("#level", "objects", xi, yi)
-			print(tile)
 			if tile == small_coin then
 				tilemap.set_tile("#level", "objects", xi, yi, 256)
 				factory.create("/testlevel1/entity_spawner#smallcoinfactory", vmath.vector3((xi-0.5)*16,(yi)*16, 0.3), nil, {type = 1})

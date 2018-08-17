@@ -1,9 +1,21 @@
+local oyster = require "oyster.oyster"
+local gamestate = require "oyster.gamestate"
+local playerdata = require "oyster.playerdata"
+local stopwatch = require "oyster.stopwatch"
+
 function init(self)
-	factory.create("#factory")
+	oyster.add("active_players", 0)
+end
+
+function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("respawn") then
 		factory.create("#factory")
+	end
+	if message_id == hash("spawn_cat") then
+		factory.create("#factory", nil, nil, {player_number = message.player_number})
+		playerdata.set(message.player_number, "ingame", true)
 	end
 end

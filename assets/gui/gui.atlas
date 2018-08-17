@@ -1,6 +1,9 @@
 images {
   image: "/assets/gui/wood button.png"
 }
+images {
+  image: "/assets/gui/test.png"
+}
 margin: 0
 extrude_borders: 0
 inner_padding: 0

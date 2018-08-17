@@ -1,19 +1,11 @@
-script: "/gui/main menu/main menu.gui_script"
+script: "/gui/quit prompt/quit prompt.gui_script"
 fonts {
   name: "pixely"
   font: "/assets/fonts/pixely.font"
 }
 textures {
-  name: "icons"
-  texture: "/assets/images/icons.atlas"
-}
-textures {
   name: "gui"
   texture: "/assets/gui/gui.atlas"
-}
-textures {
-  name: "backgrounds"
-  texture: "/assets/backgrounds/backgrounds.atlas"
 }
 background_color {
   x: 0.0
@@ -23,8 +15,62 @@ background_color {
 }
 nodes {
   position {
-    x: -100.0
-    y: 267.0
+    x: 382.0
+    y: 247.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.379
+    y: 2.26
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: ""
+  id: "box"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  layer: ""
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 0.0
+    y: 7.08
     z: 0.0
     w: 1.0
   }
@@ -41,8 +87,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 192.0
-    y: 64.0
+    x: 96.0
+    y: 32.0
     z: 0.0
     w: 1.0
   }
@@ -55,12 +101,13 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "gui/wood button"
-  id: "play_btn"
+  id: "box1"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  layer: "front"
+  parent: "box"
+  layer: ""
   inherit_alpha: true
   slice9 {
     x: 0.0
@@ -73,7 +120,7 @@ nodes {
   clipping_inverted: false
   alpha: 1.0
   template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
+  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
@@ -101,14 +148,14 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.34836066
-    y: 0.16275866
-    z: 0.06995767
+    x: 1.0
+    y: 1.0
+    z: 1.0
     w: 1.0
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "PLAY"
+  text: "Yes"
   font: "pixely"
   id: "text"
   xanchor: XANCHOR_NONE
@@ -128,20 +175,20 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "play_btn"
+  parent: "box1"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
-  outline_alpha: 0.0
-  shadow_alpha: 0.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
 }
 nodes {
   position {
-    x: -100.0
-    y: 170.0
+    x: 0.0
+    y: -30.088
     z: 0.0
     w: 1.0
   }
@@ -158,8 +205,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 192.0
-    y: 64.0
+    x: 96.0
+    y: 32.0
     z: 0.0
     w: 1.0
   }
@@ -172,12 +219,13 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: "gui/wood button"
-  id: "settings_btn"
+  id: "box2"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
   adjust_mode: ADJUST_MODE_FIT
-  layer: "front"
+  parent: "box"
+  layer: ""
   inherit_alpha: true
   slice9 {
     x: 0.0
@@ -190,7 +238,7 @@ nodes {
   clipping_inverted: false
   alpha: 1.0
   template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
+  size_mode: SIZE_MODE_AUTO
 }
 nodes {
   position {
@@ -218,14 +266,14 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.34901962
-    y: 0.16470589
-    z: 0.07058824
+    x: 1.0
+    y: 1.0
+    z: 1.0
     w: 1.0
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "OPTIONS"
+  text: "No"
   font: "pixely"
   id: "text1"
   xanchor: XANCHOR_NONE
@@ -245,74 +293,20 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "settings_btn"
+  parent: "box2"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
-  outline_alpha: 0.0
-  shadow_alpha: 0.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
 }
 nodes {
   position {
-    x: -100.0
-    y: 72.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
     x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 192.0
-    y: 64.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "gui/wood button"
-  id: "quit_btn"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_CENTER
-  adjust_mode: ADJUST_MODE_FIT
-  layer: "front"
-  inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_MANUAL
-}
-nodes {
-  position {
-    x: 0.0
-    y: 0.0
+    y: 38.496
     z: 0.0
     w: 1.0
   }
@@ -342,7 +336,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "QUIT"
+  text: "Are you sure?"
   font: "pixely"
   id: "text2"
   xanchor: XANCHOR_NONE
@@ -362,75 +356,15 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "quit_btn"
+  parent: "box"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
-  outline_alpha: 0.0
-  shadow_alpha: 0.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
   template_node_child: false
   text_leading: 1.0
   text_tracking: 0.0
-}
-nodes {
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  size {
-    x: 768.0
-    y: 512.0
-    z: 0.0
-    w: 1.0
-  }
-  color {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  type: TYPE_BOX
-  blend_mode: BLEND_MODE_ALPHA
-  texture: "backgrounds/main menu title screen"
-  id: "box"
-  xanchor: XANCHOR_NONE
-  yanchor: YANCHOR_NONE
-  pivot: PIVOT_SW
-  adjust_mode: ADJUST_MODE_FIT
-  layer: ""
-  inherit_alpha: true
-  slice9 {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 0.0
-  }
-  clipping_mode: CLIPPING_MODE_NONE
-  clipping_visible: true
-  clipping_inverted: false
-  alpha: 1.0
-  template_node_child: false
-  size_mode: SIZE_MODE_AUTO
-}
-layers {
-  name: "back"
-}
-layers {
-  name: "front"
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

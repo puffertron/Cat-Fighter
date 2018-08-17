@@ -1,7 +1,8 @@
 local monarch = require "monarch.monarch"
 local gamestate = require "oyster.gamestate"
 
-local clicking = false
+local selected
+local clicked
 local buttons = {}
 
 local function tablelength(T)
@@ -17,15 +18,24 @@ local function move_buttons(buttons, min_duration, max_duration, easing, add_pos
 	end
 end
 
-local function check_selection(buttons)
-	if clicking == true then
-		for n in pairs(buttons) do
-			x = gui.pick_node(buttons[n], mouse_x, mouse_y)
-			if x == true then
-				selected = buttons[n]
-				print(selected)
-				return selected
+local function round_position(buttons)
+	for b in pairs(buttons) do
+		node = buttons[b]
+		pos = gui.get_position(node)
+		new_pos = vmath.vector3()
+		if pos.x % 8 ~= 0 or pos.y % 8 ~= 0 then
+			if pos.x % 8 ~= 0 then
+				round = (pos.x % 8)
+				x = round
+				new_pos.x = x
 			end
+			if pos.y % 8 ~= 0 then
+				round = (pos.y % 8)
+				y = round
+				new_pos.y = y
+			end
+			new_pos.z = pos.z
+			gui.set_position(node, (pos + new_pos))
 		end
 	end
 end
@@ -37,7 +47,7 @@ function init(self)
 	local settings_btn = gui.get_node("settings_btn")
 	local quit_btn = gui.get_node("quit_btn")
 
-	local buttons = {play_btn, settings_btn, quit_btn}
+	buttons = {play_btn, settings_btn, quit_btn}
 	move_buttons(buttons, 0.7, 0.4, gui.EASING_OUTCUBIC, vmath.vector3(225,0,0))
 end
 
@@ -46,7 +56,12 @@ function final(self)
 end
 
 function update(self, dt)
-	check_selection(buttons)
+	if clicked == buttons[1] then
+		gamestate.set("IN_GAME")
+	end
+	round_position(buttons)
+	selected = nil
+	clicked = nil
 end
 
 function on_message(self, message_id, message, sender)
@@ -57,10 +72,12 @@ end
 function on_input(self, action_id, action)
 	local mouse_x = action.x
 	local mouse_y = action.y
-	if action_id == hash("click") then
-		clicking = true
-		if action.released then
-			clicking = false
+	for n in pairs(buttons) do
+		if gui.pick_node(buttons[n], action.x, action.y) == true then
+			selected = buttons[n]
+			if action_id == hash("click") then
+				clicked = buttons[n]
+			end
 		end
 	end
 end

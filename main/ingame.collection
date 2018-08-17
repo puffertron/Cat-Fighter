@@ -23,8 +23,8 @@ instances {
   id: "camera"
   prototype: "/rendercam/camera.go"
   position {
-    x: 41.0
-    y: 182.0
+    x: -121.0
+    y: 47.0
     z: 0.0
   }
   rotation {
